@@ -1,0 +1,57 @@
+﻿@model IEnumerable<_23DH114708_MyStore.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<head>
+    <style>
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px 5px;
+            box-sizing: border-box;
+            border: 1px solid #808080;
+            border-radius: 10px;
+            background-color: whitesmoke;
+        }
+
+        img {
+            height: 150px;
+            max-width: 150px;
+        }
+    </style>
+</head>
+
+<h2 class="bg-success">DANH SÁCH SẢN PHẨM</h2>
+
+<table class="table bg-info container-fluid">
+    <tr>
+        <th class="bg-success col-md-2">Hình ảnh</th>
+        <th class="bg-success col-md-2">Tên sản phẩm</th>
+        <th class="bg-success col-md-1">Đơn giá</th>
+        <th class="bg-success col-md-2">Danh mục</th>
+        <th class="bg-success col-md-4"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td><img src="@Html.DisplayFor(modelItem => item.ProductImage)" alt="Image" style="height:150px; max-width:150px;" /></td>
+            <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+            <td>@Html.DisplayFor(modelItem => item.ProductPrice, "{0:C}")</td>
+            <td>@Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.ProductID }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Chi Tiết", "Details", new { id = item.ProductID }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Xóa", "Delete", new { id = item.ProductID }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="form-group">
+    <div class="col-md-offset-8 col-md-4">
+        @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
